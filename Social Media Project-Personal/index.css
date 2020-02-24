@@ -1,17 +1,34 @@
+body {
+  background-image: url("https://us.123rf.com/450wm/yamabikay/yamabikay1611/yamabikay161100036/65548889-poker-table-felt-background-high-resolution-photo-.jpg?ver=6");
+}
+
 div {
   text-decoration-color: black;
 }
 h1 {
-  background-color: green;
   width: 50%;
+}
+
+#Title {
+  font-family: "cursive",sans-serif;
 }
 
 #mainDiv {
   background-image: url("https://us.123rf.com/450wm/yamabikay/yamabikay1611/yamabikay161100036/65548889-poker-table-felt-background-high-resolution-photo-.jpg?ver=6");
-  width: 30%;
+  width: 10%;
 }
 
 #contactDiv {
   border-style: solid;
   background-color: green;
+}
+
+#gameOptions {
+  position: relative;
+  left:100px;
+  top: 400px;
+}
+
+#playHeader {
+  font-family: cursive;
 }
