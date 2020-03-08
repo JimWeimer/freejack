@@ -8,8 +8,8 @@ TODO:
 
 There are many core functions that we need to implement. The article https://medium.com/@echohatch1/making-a-simple-blackjack-game-with-html-and-javascript-5124123762ce does a good job of outlining what needs to be implemented for a standard JS game. Using this article for inspiration, we came up with the following:
 
--A Deck object with the functions createDeck and shuffleDeck. IMPLEMENTED
--valueOfCards function (to find the value of the cards in hand). IMPLEMENTED
+-A Deck object with the functions createDeck and shuffleDeck (IMPLEMENTED).
+-valueOfCards function (to find the value of the cards in hand) (IMPLEMENTED)
 -postBet function (for the user to make their bet).
 -draw function (for the dealer).
 -endGame.
