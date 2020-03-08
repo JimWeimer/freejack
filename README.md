@@ -23,3 +23,6 @@ https://www.codecademy.com/forum_questions/5048cd03d6c7d30002051c61?locale=en
 Shuffling a deck:
 https://www.geeksforgeeks.org/shuffle-a-deck-of-cards-3/
 
+Outlining a blackjack game in JS and HTML:
+https://medium.com/@echohatch1/making-a-simple-blackjack-game-with-html-and-javascript-5124123762ce
+
