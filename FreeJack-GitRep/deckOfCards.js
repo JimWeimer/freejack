@@ -15,13 +15,43 @@ let dealer = {
 
 //Here, we want to instantiate the deck. 
 let deck = {
-    
+    deckArr = [],
+
+    createDeck: function() {
+        let ranks;
+        let suits;
+        ranks = [2,3,4,5,6,7,8,9,10,"K","Q","J","A"];
+        suits = ["clubs","diamonds","hearts","spades"];
+
+        //Here, we are creating the loop to fill the new deck with all the required cards. 
+        for (let i = 0; i < suits.length; i++) {
+            for(let j = 0; j < ranks.length; j++) {
+                deckArr[s*13 + r] = { //I drew on a post by CodeAcademy which explained how to fill a deck of cards for this.
+                    suit: suits[i],
+                    rank: ranks[j]
+                };
+            }
+        }
+    },
+
+    shuffleDeck: function() {
+        let temporaryVal;
+        let deckSize = deckArr.length;
+        let randomVal;
+
+        for(let i = 0; i < deckSize; i++) {
+            temporaryVal = deckArr[i];
+            randomVal = Math.floor(Math.random() * (deckArr.length+1 - (0 + 1)) + 0);
+            deckArr[i] = deckArr[randomVal];
+            deckArr[randomVal] = temporaryVal; 
+        }
+    }
 }
 //Here, we create the necessary game functions.
 
-
 function valueOfCards(cards) {
     let cardSum = 0;
+    let numAces;
     //In this block, we aim to go through the array of cards and keep track of the total SUM. We have to check the rank of each
     //card in the deck. Since Blackjack views kings, queens, and jacks as being all worth 10, we check if the card at index i is either of those
     //and assign it value of 10.
@@ -31,11 +61,11 @@ function valueOfCards(cards) {
         }
 
         if (cards[i].rank === "A") {
-            sum += 11;
+            cardSum += 11;
         }
 
         else {
-            sum += cards[i].rank
+            cardSum += cards[i].rank
         }
     }
 //Aces are dealt with in a different fashion. We keep track of the number of aces in a previous if statement, and then at the end,
@@ -46,7 +76,6 @@ while (numAces >= 1) {
         numAces = numAces - 1;
     }
   }
-
 }
 
 function bet() {
