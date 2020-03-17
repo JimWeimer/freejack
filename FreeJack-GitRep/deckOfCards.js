@@ -9,12 +9,12 @@ let dealer = {
     cards: [],
     currentScore: 0
 };
-const numberOfCards = 0; //using this to keep number of cards pulled!
-//Here, we are getting the HTML elements (byID). elements needed: hit, stand, (anything else?)
+let numberOfCards = 0; //using this to keep number of cards pulled!
+//Here, we are getting the HTML elements (byID). elements needed: hit, stand, newGame, (anything else?)
 
 //Here, we want to instantiate the deck. 
-let deck = {
-    deckArr = [],
+var deck = {
+    deckArr: [],
 
     fillDeck: function() {
         let ranks;
@@ -25,7 +25,7 @@ let deck = {
         //Here, we are creating the loop to fill the new deck with all the required cards. 
         for (let i = 0; i < suits.length; i++) {
             for(let j = 0; j < ranks.length; j++) {
-                deckArr[s*13 + r] = { //I drew on a post by CodeAcademy which explained how to fill a deck of cards for this.
+                this.deckArr[i*13 + j] = { //I drew on a post by CodeAcademy which explained how to fill a deck of cards for this.
                     suit: suits[i],
                     rank: ranks[j]
                 };
@@ -33,6 +33,20 @@ let deck = {
         }
     },
 
+    shuffleDeck: function() {
+        let temporaryVal;
+        let deckSize = this.deckArr.length;
+        let randomVal;
+
+        for(let i = 0; i < deckSize; i++) {
+            temporaryVal = this.deckArr[i];
+            randomVal = Math.floor(Math.random() * (this.deckArr.length+1 - (0 + 1)) + 0);
+            this.deckArr[i] = this.deckArr[randomVal];
+            this.deckArr[randomVal] = temporaryVal; 
+        }
+        let tempDeckArr = this.deckArr;
+        deck.setDeckArr(tempDeckArr);
+},
     getDeckArr: function() {
         return this.deckArr;
     },
@@ -42,23 +56,24 @@ let deck = {
     }
 }
 
+/*
 function shuffleDeck(deck) {
-        let temporaryVal;
-        let tempDeckArr = deck.getDeckArr();
-        let deckSize = tempDeckArr.length();
-        let randomVal;
+    let temporaryVal;
+    let tempDeckArr = deck.getDeckArr();
+    let deckSize = tempDeckArr.length();
+    let randomVal;
 
-        for(let i = 0; i < deckSize; i++) {
-            temporaryVal = tempDeckArr[i];
-            randomVal = Math.floor(Math.random() * (tempDeckArr.length+1 - (0 + 1)) + 0);
-            tempDeckArr[i] = tempDeckArr[randomVal];
-            tempDeckArr[randomVal] = temporaryVal; 
-        }
-        deck.setDeckArr(tempDeckArr);
+    for(let i = 0; i < deckSize; i++) {
+        temporaryVal = tempDeckArr[i];
+        randomVal = Math.floor(Math.random() * (tempDeckArr.length+1 - (0 + 1)) + 0);
+        tempDeckArr[i] = tempDeckArr[randomVal];
+        tempDeckArr[randomVal] = temporaryVal; 
+    }
+    deck.setDeckArr(tempDeckArr);
 }
+*/ 
 
 //Here, we create the necessary game functions.
-
 function valueOfCards(cards) {
     let cardSum = 0;
     let numAces;
@@ -86,14 +101,34 @@ while (numAces >= 1) {
         numAces = numAces - 1;
     }
   }
+  return cardSum;
 }
 
-function makeBet() {
+function makeBet(result) {
+    let betAmount = document.getElementById("playerBet").parseInt();
+
+    //Here, we are going to see if the user passed in a 1 (win) or 0 (loss).
+    if (result === 0) {
+        player.money = player.money - betAmount;
+    }
+
+    if (result === 1) {
+        player.money = player.money + betAmount;
+    }
 
 }
 
-function draw() {
-
+function drawDealer() {
+    //This function is somewhat similar to the hit function, except its made for the dealer. 
+    //We first grab a random card, and then we need to push it to the array used for the dealer.
+    let tempCards = deck.deckArr[numberOfCards];
+    dealer.cards.push(tempCards);
+    let tempScore = valueOfCards(dealer.cards); //Here, we temporarily need the current score of the dealer. Then we grab their cards as
+    //String (using json.stringify)
+    let dealerCardsString = JSON.stringify(dealer.cards);
+    document.getElementById("Dealer Cards").innerHTML = "Dealer's Cards: " + dealerCardsString;
+    document.getElementById("Score: Dealer").innerHTML = "Score Dealer: " + tempScore;
+    numberOfCards++;
 }
 
 function hit() {
@@ -107,25 +142,32 @@ function hit() {
     document.getElementById("Score: Player").innerHTML = "Score Player: " + tempScore;
     document.getElementById("Player Cards").innerHTML = "Player's Current Cards: " + playerCardsString;
     numberOfCards++;
-
-
 }
 
 function stand() {
     let score = dealer.currentScore;
     while (score < 17) {
-        draw();
+        drawDealer();
     }
+    endGame();
 }
 
 function newGame() {
+    /*
+    let gameDiv = document.getElementById("gameBox").querySelectorAll("button");
+    gameDiv[0].disabled = true;
+    gameDiv[1].disabled = false;
+    gameDiv[2].disabled = false; 
+    */
+    deck.fillDeck();
+    deck.shuffleDeck();
     document.getElementById("btnStart").disabled = true;
     document.getElementById("btnHit").disabled = false;
     document.getElementById("btnStay").disabled = false;
-
+    
     hit();
     hit();
-    draw();
+    drawDealer();
     endGame();
 }
 
@@ -138,21 +180,26 @@ function endGame() {
         //Player wins!
         document.getElementById("msgBox").innerHTML = "Congratulations, you win!";
         document.getElementById("Money").innerHTML = "Total Money: " + tempPlayerMoney;
+        makeBet(1);
         //need to reset board here somehow...
     }
 
     if(tempDealerScore === 21) {
         document.getElementById("msgBox").innerHTML = "Uh oh, looks like the dealer wins :(";
+        makeBet(0);
         //reset the board...
     }
 
     if(tempPlayerScore > 21) {
         document.getElementById("msgBox").innerHTML = "Sorry, your total card value is over 21. Dealer wins :(";
+        makeBet(0);
         //reset the board...
+
     }
 
     if(tempDealerScore > 21) {
         document.getElementById("msgBox").innerHTML = "Congratulations, dealer score is greater than 21. You win!";
+        makeBet(1);
         //reset the board...
     }
 
@@ -161,6 +208,10 @@ function endGame() {
         //disable the buttons to play
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
+    }
+
+    else {
+        //doNothing
     }
 }
 

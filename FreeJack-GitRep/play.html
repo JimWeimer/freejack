@@ -4,22 +4,21 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body id="playBody">
+  <script src="deckOfCards.js"></script>
   <h1 id= "playHeader">FreeJack</h1>
 
-  <div>
     <!-- This is where I imagine most of our game is going to take place -->
-    <div id = "Cards">
       <div id = "Player Cards"></div>
+      <br>
       <div id = "Dealer Cards"></div>
-    </div>
+    
 
     <br>
 
-    <div id="gameBox">
-  <input type="button" id="btnStart" class="btn" value="New Game" onclick="startblackjack()">
-  <input type="button" id="btnHit" class="btn" value="Hit Me" onclick="hitMe()">
-  <input type="button" id="btnStay" class="btn" value="Stay" onclick="stay()">
-</div>
+  <input type="button" id="btnStart" class="button" value="New Game" onclick='newGame();'/>
+  <input type="button" id="btnHit" class="button" value="Hit Me" onclick='hit();'/>
+  <input type="button" id="btnStay" class="button" value="Stay" onclick='stand();'/>
+
     <br>
     <h2 id = "MoneyHeader">Money</h2>
     <div id = "Money"></div>
@@ -28,17 +27,14 @@
     <input type = 'number' id = 'playerBet' value = '5' min = '1' />
     <br>
 
-    <div id = "Scores">
+    
       <div id = "Score: Dealer"></div>
       <div id = "Score: Player"></div>
-    </div> 
+    
     <br>
 
     <textArea id = "msgBox" rows = "5" cols = "50"></textArea>
 
-    <script src="deckOfCards.js"></script>
-
-    </div>
 </body>
 
 </html>
