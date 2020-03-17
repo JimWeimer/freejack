@@ -76,7 +76,7 @@ function shuffleDeck(deck) {
 //Here, we create the necessary game functions.
 function valueOfCards(cards) {
     let cardSum = 0;
-    let numAces;
+    let numAces = 0;
     //In this block, we aim to go through the array of cards and keep track of the total SUM. We have to check the rank of each
     //card in the deck. Since Blackjack views kings, queens, and jacks as being all worth 10, we check if the card at index i is either of those
     //and assign it value of 10.
@@ -123,7 +123,8 @@ function drawDealer() {
     //We first grab a random card, and then we need to push it to the array used for the dealer.
     let tempCards = deck.deckArr[numberOfCards];
     dealer.cards.push(tempCards);
-    let tempScore = valueOfCards(dealer.cards); //Here, we temporarily need the current score of the dealer. Then we grab their cards as
+    let tempScore = valueOfCards(dealer.cards);
+    dealer.score = tempScore; //Here, we temporarily need the current score of the dealer. Then we grab their cards as
     //String (using json.stringify)
     let dealerCardsString = JSON.stringify(dealer.cards);
     document.getElementById("Dealer Cards").innerHTML = "Dealer's Cards: " + dealerCardsString;
@@ -137,18 +138,18 @@ function hit() {
     player.cards.push(tempCard);
     //Finding the sum of the card values currently in hand. 
     let tempScore = valueOfCards(player.cards);
+    player.score = tempScore;
     let playerCardsString = JSON.stringify(player.cards);
     //Here we edit the HTML after the player has asked to hit.
     document.getElementById("Score: Player").innerHTML = "Score Player: " + tempScore;
     document.getElementById("Player Cards").innerHTML = "Player's Current Cards: " + playerCardsString;
     numberOfCards++;
+
+    endGame();
 }
 
 function stand() {
-    let score = dealer.currentScore;
-    while (score < 17) {
-        drawDealer();
-    }
+    drawDealer();
     endGame();
 }
 
@@ -171,48 +172,49 @@ function newGame() {
     endGame();
 }
 
+
 function endGame() {
-    let tempPlayerScore = player.score;
+    let tempPlayerScore = player.currentScore;
     let tempPlayerMoney = player.money;
-    let tempDealerScore = dealer.score;
+    let tempDealerScore = dealer.currentScore;
 
     if(tempPlayerScore === 21) {
         //Player wins!
-        document.getElementById("msgBox").innerHTML = "Congratulations, you win!";
-        document.getElementById("Money").innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById('msgBox').innerHTML = "Congratulations, you win!";
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
         makeBet(1);
-        //need to reset board here somehow...
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById("btnStay").disabled = true;
     }
 
     if(tempDealerScore === 21) {
-        document.getElementById("msgBox").innerHTML = "Uh oh, looks like the dealer wins :(";
+        document.getElementById('msgBox').innerHTML = "Uh oh, looks like the dealer wins :(";
         makeBet(0);
-        //reset the board...
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById("btnStay").disabled = true;
     }
 
     if(tempPlayerScore > 21) {
-        document.getElementById("msgBox").innerHTML = "Sorry, your total card value is over 21. Dealer wins :(";
+        document.getElementById('msgBox').innerHTML = "Sorry, your total card value is over 21. Dealer wins :(";
         makeBet(0);
-        //reset the board...
-
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById("btnStay").disabled = true;
     }
 
     if(tempDealerScore > 21) {
-        document.getElementById("msgBox").innerHTML = "Congratulations, dealer score is greater than 21. You win!";
+        document.getElementById('msgBox').innerHTML = "Congratulations, dealer score is greater than 21. You win!";
         makeBet(1);
-        //reset the board...
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById("btnStay").disabled = true;
     }
 
     if (tempPlayerMoney === 0) {
-        document.getElementById("msgBox").innerHTML = "Sorry, you ran out of money! :((";
+        document.getElementById('msgBox').innerHTML = "Sorry, you ran out of money! :((";
         //disable the buttons to play
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
     }
 
-    else {
-        //doNothing
-    }
 }
 
 
