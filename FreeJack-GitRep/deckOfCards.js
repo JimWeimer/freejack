@@ -1,4 +1,4 @@
-//Here, we instantiate the 2 objects used for the game, player and dealer.
+//Here, we instantiate the 2 objects used for the game, player and dealer. Each have cards array and currentScore to keep points.
 let player = {
     cards: [],
     money: 50,
@@ -11,7 +11,8 @@ let dealer = {
 };
 let numberOfCards = 0; //using this to keep number of cards pulled!
 //Here, we are getting the HTML elements (byID). elements needed: hit, stand, newGame, (anything else?)
-//Here, we want to instantiate the deck. 
+
+//Here, we want to instantiate the deck 
 var deck = {
     deckArr: [],
 
@@ -32,20 +33,6 @@ var deck = {
         }
     },
 
-    shuffleDeck: function() {
-        let temporaryVal;
-        let deckSize = this.deckArr.length;
-        let randomVal;
-
-        for(let i = 0; i < deckSize; i++) {
-            temporaryVal = this.deckArr[i];
-            randomVal = Math.floor(Math.random() * (this.deckArr.length+1 - (0 + 1)) + 0);
-            this.deckArr[i] = this.deckArr[randomVal];
-            this.deckArr[randomVal] = temporaryVal; 
-        }
-        let tempDeckArr = this.deckArr;
-        deck.setDeckArr(tempDeckArr);
-},
     getDeckArr: function() {
         return this.deckArr;
     },
@@ -55,24 +42,23 @@ var deck = {
     }
 }
 
-/* This is how i tried to create shuffle originally, but I'm leaving this in in-case I need to use it. 
-function shuffleDeck(deck) {
+//This function will take the array of the deck object, replace a "buncha" values using the for loop, and return a new array.
+function shuffletheDeck() {
     let temporaryVal;
-    let tempDeckArr = deck.getDeckArr();
-    let deckSize = tempDeckArr.length();
+    let tempDeck = deck.getDeckArr();
+    let deckSize = deck.deckArr.length;
     let randomVal;
 
     for(let i = 0; i < deckSize; i++) {
-        temporaryVal = tempDeckArr[i];
-        randomVal = Math.floor(Math.random() * (tempDeckArr.length+1 - (0 + 1)) + 0);
-        tempDeckArr[i] = tempDeckArr[randomVal];
-        tempDeckArr[randomVal] = temporaryVal; 
+        temporaryVal = tempDeck[i];
+        randomVal = Math.floor(Math.random() * (tempDeck.length + 1 - (0 + 1)) + 0);
+        tempDeck[i] = tempDeck[randomVal];
+        tempDeck[randomVal] = temporaryVal; 
     }
-    deck.setDeckArr(tempDeckArr);
+    deck.setDeckArr(tempDeck);
 }
-*/ 
 
-//Here, we create the necessary game functions.
+//From this point on, we are creating the necessary game functions that have been outlined. 
 function valueOfCards(cards) {
     let cardSum = 0;
     let numAces = 0;
@@ -87,7 +73,7 @@ function valueOfCards(cards) {
         else if (cards[i].rank === "A") {
             cardSum += 11;
         }
-
+        //isNaN normally checks if a variable is NOT a number, but I want the opposite (IS it a number)
         else if (!isNaN(cards[i].rank)) {
             cardSum += cards[i].rank;
         }
@@ -159,14 +145,9 @@ function stand() {
 }
 
 function newGame() {
-    /*
-    let gameDiv = document.getElementById("gameBox").querySelectorAll("button");
-    gameDiv[0].disabled = true;
-    gameDiv[1].disabled = false;
-    gameDiv[2].disabled = false; 
-    */
     deck.fillDeck();
-    deck.shuffleDeck();
+    //deck.shuffleDeck();
+    shuffletheDeck(); //New method made to reduce complexity of code in the object named deck
     document.getElementById("btnStart").disabled = true;
     document.getElementById("btnHit").disabled = false;
     document.getElementById("btnStay").disabled = false;
@@ -176,7 +157,7 @@ function newGame() {
     drawDealer();
     endGame();
 }
-
+//VERY important function. This essentially determines if the player loses or wins.
 function endGame() {
     let tempPlayerScore = player.currentScore;
     let tempPlayerMoney = player.money;
