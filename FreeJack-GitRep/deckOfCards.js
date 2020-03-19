@@ -121,24 +121,28 @@ function makeBet(result) {
 function drawDealer() {
     //This function is somewhat similar to the hit function, except its made for the dealer. 
     //We first grab a random card, and then we need to push it to the array used for the dealer.
-    let tempCards = deck.deckArr[numberOfCards];
+    let tempIndex = numberOfCards;
+    let tempCards = deck.deckArr[tempIndex];
     dealer.cards.push(tempCards);
     let tempScore = valueOfCards(dealer.cards);
-    dealer.score = tempScore; //Here, we temporarily need the current score of the dealer. Then we grab their cards as
+    dealer.currentScore = tempScore; //Here, we temporarily need the current score of the dealer. Then we grab their cards as
     //String (using json.stringify)
     let dealerCardsString = JSON.stringify(dealer.cards);
     document.getElementById("Dealer Cards").innerHTML = "Dealer's Cards: " + dealerCardsString;
     document.getElementById("Score: Dealer").innerHTML = "Score Dealer: " + tempScore;
+
+    endGame();
     numberOfCards++;
 }
 
 function hit() {
     //Grabbing a card from the deck, and then placing it in the players cards array.
-    let tempCard = deck.deckArr[numberOfCards];
+    let tempIndex = numberOfCards;
+    let tempCard = deck.deckArr[tempIndex];
     player.cards.push(tempCard);
     //Finding the sum of the card values currently in hand. 
     let tempScore = valueOfCards(player.cards);
-    player.score = tempScore;
+    player.currentScore = tempScore;
     let playerCardsString = JSON.stringify(player.cards);
     //Here we edit the HTML after the player has asked to hit.
     document.getElementById("Score: Player").innerHTML = "Score Player: " + tempScore;
