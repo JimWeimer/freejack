@@ -11,7 +11,6 @@ let dealer = {
 };
 let numberOfCards = 0; //using this to keep number of cards pulled!
 //Here, we are getting the HTML elements (byID). elements needed: hit, stand, newGame, (anything else?)
-
 //Here, we want to instantiate the deck. 
 var deck = {
     deckArr: [],
@@ -56,7 +55,7 @@ var deck = {
     }
 }
 
-/*
+/* This is how i tried to create shuffle originally, but I'm leaving this in in-case I need to use it. 
 function shuffleDeck(deck) {
     let temporaryVal;
     let tempDeckArr = deck.getDeckArr();
@@ -80,17 +79,17 @@ function valueOfCards(cards) {
     //In this block, we aim to go through the array of cards and keep track of the total SUM. We have to check the rank of each
     //card in the deck. Since Blackjack views kings, queens, and jacks as being all worth 10, we check if the card at index i is either of those
     //and assign it value of 10.
-    for (i = 0; i < cards.length; i += 1) {
+    for (i = 0; i < cards.length; i++) {
         if (cards[i].rank === "K" || cards[i].rank === "Q" || cards[i].rank === "J") {
             cardSum += 10;
         }
 
-        if (cards[i].rank === "A") {
+        else if (cards[i].rank === "A") {
             cardSum += 11;
         }
 
-        else {
-            cardSum += cards[i].rank
+        else if (!isNaN(cards[i].rank)) {
+            cardSum += cards[i].rank;
         }
     }
 //Aces are dealt with in a different fashion. We keep track of the number of aces in a previous if statement, and then at the end,
@@ -153,6 +152,8 @@ function hit() {
 }
 
 function stand() {
+    //Simple function here where the dealer is supposed to draw once the player chooses stand. Then endGame() is called
+    //to check status of cards. 
     drawDealer();
     endGame();
 }
@@ -175,7 +176,6 @@ function newGame() {
     drawDealer();
     endGame();
 }
-
 
 function endGame() {
     let tempPlayerScore = player.currentScore;
@@ -220,8 +220,3 @@ function endGame() {
     }
 
 }
-
-
-
-
-
