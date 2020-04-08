@@ -97,7 +97,7 @@ function makeBet(result) {
         player.money = player.money - betAmount;
     }
 
-    if (result === 1) {
+    else {
         player.money = player.money + betAmount;
     }
 
@@ -135,13 +135,19 @@ function hit() {
     numberOfCards++;
 
     endGame();
+   
 }
 
 function stand() {
     //Simple function here where the dealer is supposed to draw once the player chooses stand. Then endGame() is called
     //to check status of cards. 
-    drawDealer();
+    tempDealerScore = dealer.currentScore;
+    while(tempDealerScore< 17) {
+        drawDealer();
+        tempDealerScore = dealer.currentScore;
+    }
     endGame();
+    
 }
 
 function newGame() {
@@ -155,8 +161,10 @@ function newGame() {
     hit();
     hit();
     drawDealer();
+    document.getElementById("Money").innerHTML = player.money;
     endGame();
 }
+
 //VERY important function. This essentially determines if the player loses or wins.
 function endGame() {
     let tempPlayerScore = player.currentScore;
@@ -170,6 +178,7 @@ function endGame() {
         makeBet(1);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
+        document.getElementById("btnStart").disabled = false;
     }
 
     if(tempDealerScore === 21) {
@@ -177,6 +186,8 @@ function endGame() {
         makeBet(0);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
     }
 
     if(tempPlayerScore > 21) {
@@ -184,6 +195,8 @@ function endGame() {
         makeBet(0);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
     }
 
     if(tempDealerScore > 21) {
@@ -191,6 +204,8 @@ function endGame() {
         makeBet(1);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
     }
 
     if (tempPlayerMoney === 0) {
@@ -198,6 +213,36 @@ function endGame() {
         //disable the buttons to play
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
+    }
+    
+    //here we have to find a way to not have the player not manually keep pressing stay... possible check scores above 17 for dealer?
+    //In BlackJack, if dealer has 17 then they are going to stand... keep that in mind. 
+    if (tempDealerScore >= 17 && (tempPlayerScore < tempDealerScore) && tempPlayerScore < 21) {
+        document.getElementById('msgBox').innerHTML = "You lost. Dealer score is higher :(";
+        makeBet(0);
+        document.getElementById("btnStay").disabled = true;
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
     }
 
+    if (tempDealerScore >= 17 && (tempPlayerScore > tempDealerScore) && tempPlayerScore < 21) {
+        document.getElementById('msgBox').innerHTML = "You win! You beat Dealer!";
+        makeBet(1);
+        document.getElementById("btnStay").disabled = true;
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
+    }
+
+    if (tempDealerScore >= 17 && (tempPlayerScore === tempDealerScore) && tempDealerScore < 21) {
+        document.getElementById('msgBox').innerHTML = "You tied with the dealer! ";
+        document.getElementById("btnStay").disabled = true;
+        document.getElementById("btnHit").disabled = true;
+        document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
+        document.getElementById("btnStart").disabled = false;
+    }
+    
 }
