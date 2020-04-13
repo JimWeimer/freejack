@@ -8,14 +8,13 @@
 
     <!-- This is where I imagine most of our game is going to take place -->
       <div id = "Player Cards"></div>
-      <br>
+      <canvas id="playerCanvas" width="500" height="200"></canvas>
       <div id = "Dealer Cards"></div>
 
       <!--Here is the canvas. In here, we will want to display cards-->
-      <canvas id="dealerCanvas" width="300" height="200"></canvas>
-      <canvas id="playerCanvas" width="300" height="200"></canvas>
-      <br>
+      <canvas id="dealerCanvas" width="500" height="200"></canvas>
 
+  <br>
   <input type="button" id="btnStart" class="button" value="New Game" onclick='newGame();'/>
   <input type="button" id="btnHit" class="button" value="Hit" onclick='hit();'/>
   <input type="button" id="btnStay" class="button" value="Stay" onclick='stand();'/>

@@ -136,7 +136,7 @@ function drawCardImage(card, i) {
         if (context) {
             //for(let i = 0; i < tempCards.length; i++) {
                 currentCard.onload = function() {
-                    context.drawImage(currentCard, (i+84), 0,80,80);
+                    context.drawImage(currentCard, (i*110), 0,100,100);
                 }
 
                 if(card.suit === "clubs" && card.rank === 10) {
@@ -167,7 +167,7 @@ function drawCardImage(card, i) {
                     currentCard.src = 'https://i.postimg.cc/nhMn10L6/2H.jpg';
                 }
 
-                if(card.suit === "clubs" && card.rank === 2) {
+                if(card.suit === "spades" && card.rank === 2) {
                     currentCard.src = 'https://i.postimg.cc/Kcrcc1Vs/2S.jpg';
                 }
 
