@@ -120,17 +120,27 @@ function drawDealer() {
     let dealerCardsString = JSON.stringify(dealer.cards);
     document.getElementById("Dealer Cards").innerHTML = "Dealer's Cards: " + dealerCardsString;
     document.getElementById("Score: Dealer").innerHTML = "Score Dealer: " + tempScore;
-
+    let dealerCheck = true;
     for(let i = 0; i < dealer.cards.length; i++) {
-        drawCardImage(dealer.cards[i],i);
+        drawCardImage(dealer.cards[i],i,dealerCheck);
     } 
     endGame();
     numberOfCards++;
 }
 
-function drawCardImage(card, i) {
-    var dealerCanvas = document.getElementById('dealerCanvas');
-    var context = dealerCanvas.getContext('2d');
+//This function checks what kind of card is passed to it, and it will then displa it on the corresponding canvas element.
+//We also pass the i from a for loop so that we can display coordinates dynamically, and then we check if we are feeding the function
+//with the cards from the dealers hand (or players hand)
+function drawCardImage(card, i, dealerCheck) {
+    if(dealerCheck === true) { 
+        var dealerCanvas = document.getElementById('dealerCanvas');
+        var context = dealerCanvas.getContext('2d');
+    }
+    else {
+        var dealerCanvas = document.getElementById('playerCanvas');
+        var context = dealerCanvas.getContext('2d');
+    }
+
     let currentCard = new Image();
         //Here we want the card images to display.
         if (context) {
@@ -366,6 +376,12 @@ function hit() {
     //Here we edit the HTML after the player has asked to hit.
     document.getElementById("Score: Player").innerHTML = "Score Player: " + tempScore;
     document.getElementById("Player Cards").innerHTML = "Player's Current Cards: " + playerCardsString;
+    //Loop through the players cards array and draw the image on playercanvas. 
+    let dealerCheck = false;
+    for(let i = 0; i < player.cards.length; i++) {
+        drawCardImage(player.cards[i],i,dealerCheck);
+    } 
+    
     numberOfCards++;
 
     endGame();
