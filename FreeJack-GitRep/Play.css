@@ -1,0 +1,15 @@
+body {
+    background-image: url("https://singularityhub.com/wp-content/uploads/2019/07/Casino-poker-chips-on-green-felt-background-artificial-intelligence-shutterstock-658269847.jpg");
+    background-size: cover;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+#playHeader {
+    font-family: 'Anton', sans-serif;
+    height: 40px;
+    padding: 3px;
+  }

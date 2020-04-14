@@ -130,7 +130,7 @@ function drawDealer() {
 
 //This function checks what kind of card is passed to it, and it will then displa it on the corresponding canvas element.
 //We also pass the i from a for loop so that we can display coordinates dynamically, and then we check if we are feeding the function
-//with the cards from the dealers hand (or players hand)
+//with the cards from the dealer's hand (or players hand)
 function drawCardImage(card, i, dealerCheck) {
     if(dealerCheck === true) { 
         var dealerCanvas = document.getElementById('dealerCanvas');

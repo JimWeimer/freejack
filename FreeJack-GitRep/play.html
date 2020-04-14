@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="play.css">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 </head>
 <body id="playBody">
-  <h1 id= "playHeader">FreeJack</h1>
 
+  <div class = "flex-container">
+  <h1 id= "playHeader">FreeJack</h1>
+  </div>
     <!-- This is where I imagine most of our game is going to take place -->
       <div id = "Player Cards"></div>
       <canvas id="playerCanvas" width="1200" height="120"></canvas>
@@ -15,9 +18,12 @@
       <canvas id="dealerCanvas" width="1200" height="120"></canvas>
 
   <br>
+  <br>
+  <div class="flex-container">
   <input type="button" id="btnStart" class="button" value="New Game" onclick='newGame();'/>
   <input type="button" id="btnHit" class="button" value="Hit" onclick='hit();'/>
   <input type="button" id="btnStay" class="button" value="Stay" onclick='stand();'/>
+  </div>
 
     <br>
     <h2 id = "MoneyHeader">Money</h2>
@@ -29,8 +35,6 @@
     
       <div id = "Score: Dealer"></div>
       <div id = "Score: Player"></div>
-    
-    <br>
 
     <h3 id="msgBox"></h3>
 
