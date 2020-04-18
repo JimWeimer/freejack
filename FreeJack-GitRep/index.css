@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://cei.org/sites/default/files/bigstock-Poker-Background-62159249.jpg");
+  background-color: #35654d;
   background-size: cover;
 }
 
@@ -13,6 +13,58 @@ h1 {
 .flex-container{
   display: flex;
   justify-content: center;
+}
+
+#indexHeader {
+    font-family: 'Anton', sans-serif;
+    font-weight: lighter;
+    color: #DAA520;
+    height: 45px;
+    padding: 10px 0;
+    margin: 0;
+    float: left;
+  }
+
+  .container {
+    width: 60%;
+    height: 70px;
+    margin: 0 auto;
+  }
+
+
+  header{
+    background: #00006b;
+  }
+
+header::after{
+  content: '';
+  display: table;
+  clear: both;
+}
+  nav{
+    float: right;
+  }
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li{
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+}
+
+nav a{
+  color: #DAA520;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a:hover{
+  color: #FFDF00;
 }
 
 #Title {
@@ -33,20 +85,8 @@ h1 {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-#aboutBox {
-  border-style: solid;
-  background-color: green;
-  background-size: auto;
-  width: 350px;
-  
-  top: 80%;
-  right: 30%;
-  position: absolute;
-}
-
 #gameOptions {
   position: relative;
   left:100px;
   top: 400px;
 }
-

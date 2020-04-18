@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://singularityhub.com/wp-content/uploads/2019/07/Casino-poker-chips-on-green-felt-background-artificial-intelligence-shutterstock-658269847.jpg");
+    background-color: #35654d;
     background-size: cover;
 }
 
@@ -10,6 +10,52 @@ body {
 
 #playHeader {
     font-family: 'Anton', sans-serif;
-    height: 40px;
-    padding: 3px;
+    font-weight: lighter;
+    color: #DAA520;
+    height: 45px;
+    padding: 10px 0;
+    margin: 0;
+    float: left;
   }
+
+  .container {
+    width: 60%;
+    height: 70px;
+    margin: 0 auto;
+  }
+
+
+  header{
+    background: #00006b;
+  }
+
+header::after{
+  content: '';
+  display: table;
+  clear: both;
+}
+  nav{
+    float: right;
+  }
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li{
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+}
+
+nav a{
+  color: #DAA520;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a:hover{
+  color: #FFDF00;
+}

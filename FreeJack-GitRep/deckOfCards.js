@@ -90,17 +90,21 @@ while (numAces >= 1) {
 }
 
 function makeBet(result) {
-    let betAmount = document.getElementById("playerBet").parseInt();
+    let betAmount = document.getElementById("playerBet").value;
 
     //Here, we are going to see if the user passed in a 1 (win) or 0 (loss).
     if (result === 0) {
         player.money = player.money - betAmount;
+        
     }
 
     else {
         player.money = player.money + betAmount;
+        
     }
 
+    displayMoney();
+    
 }
 
 function drawDealer() {
@@ -385,6 +389,7 @@ function hit() {
     numberOfCards++;
 
     endGame();
+   
     //document.getElementById('btnStart').disabled = false;
 }
 
@@ -397,6 +402,7 @@ function stand() {
         tempDealerScore = dealer.currentScore;
     }
     endGame();
+    
     //document.getElementById('btnStart').disabled = false;
 }
 
@@ -438,6 +444,7 @@ function endGame() {
         document.getElementById("btnStay").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
         document.getElementById("btnStart").disabled = false;
+        
 
     }
 
@@ -448,7 +455,7 @@ function endGame() {
         document.getElementById("btnStay").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
         document.getElementById("btnStart").disabled = false;
-    
+        
     }
 
     if(tempDealerScore > 21) {
@@ -499,10 +506,73 @@ function endGame() {
         document.getElementById("btnStart").disabled = false;
         
     }
-    
+
 }
 
 function resetCardString() {
     document.getElementById("Dealer Cards").innerHTML = "";
     document.getElementById("Player Cards").innerHTML = "";
+}
+
+function displayMoney() {
+    let currentMoney = player.money;
+    var moneyCanvas = document.getElementById('moneyCanvas');
+    var context = moneyCanvas.getContext('2d');
+    let currentChip = new Image();
+
+    currentChip.onload = function() {
+        context.drawImage(currentChip, (i*90), 0,80,80);
+    }
+    
+    if(context) {
+        let i = 0;
+    
+        while (currentMoney >= 0) { 
+
+            if (currentMoney % 500 === 0) {
+                currentChip.src = "https://i.postimg.cc/g2gdqxmm/500Chip.jpg";
+                currentMoney -= 500;
+                i++;
+               
+            }
+            else if (currentMoney % 100 === 0) {
+                currentChip.src = "https://i.postimg.cc/WzqtxMpG/100Chip.jpg";
+                currentMoney -= 100;
+                i++;
+                
+            }
+            else if (currentMoney % 50 === 0) {
+                currentChip.src = "https://i.postimg.cc/sfMc3qvc/50Chip.jpg";
+                currentMoney -= 50;
+                i++;
+            }
+
+            else if (currentMoney % 25 === 0) {
+                currentChip.src = "https://i.postimg.cc/zBcVddND/25Chip.jpg";
+                currentMoney -= 25;
+                i++;
+            }
+
+            else if (currentMoney % 10 === 0) {
+                currentChip.src = "https://i.postimg.cc/fLLVjG6g/10chip.jpg";
+                currentMoney -= 10;
+                i++;
+            }
+
+            else if (currentMoney % 5 === 0) {
+                currentChip.src = "https://i.postimg.cc/5tpHz4kC/5chip.jpg";
+                currentMoney -= 5;
+                i++;
+            }
+
+            else {
+                currentChip.src = "https://i.postimg.cc/1zyn4nMS/1chip.jpg";
+                currentMoney -= 1;
+                i++;
+
+            }
+        
+            
+    }
+   }     
 }

@@ -6,8 +6,21 @@
 </head>
 <body id="playBody">
 
+  <header>
+    <div class="container">
+      <h1 id= "playHeader">FreeJack</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Credits</a></li>
+          <li><a href="#">Sign In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
   <div class = "flex-container">
-  <h1 id= "playHeader">FreeJack</h1>
   </div>
     <!-- This is where I imagine most of our game is going to take place -->
       <div id = "Player Cards"></div>
@@ -28,11 +41,11 @@
     <br>
     <h2 id = "MoneyHeader">Money</h2>
     <div id = "Money"></div>
-
     <input type = 'number' id = 'playerBet' value = '5' min = '1' />
+    <canvas id = "moneyCanvas" width = "800" height = "120"></canvas>
     <br>
 
-    
+
       <div id = "Score: Dealer"></div>
       <div id = "Score: Player"></div>
 
