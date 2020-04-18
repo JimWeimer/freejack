@@ -103,7 +103,7 @@ function makeBet(result) {
         
     }
 
-    displayMoney();
+    //displayMoney();
     
 }
 
@@ -389,7 +389,7 @@ function hit() {
     numberOfCards++;
 
     endGame();
-   
+    displayMoney();
     //document.getElementById('btnStart').disabled = false;
 }
 
@@ -402,7 +402,7 @@ function stand() {
         tempDealerScore = dealer.currentScore;
     }
     endGame();
-    
+    displayMoney();
     //document.getElementById('btnStart').disabled = false;
 }
 
@@ -428,85 +428,86 @@ function endGame() {
 
     if(tempPlayerScore === 21) {
         //Player wins!
-        document.getElementById('msgBox').innerHTML = "Congratulations, you win!";
+        document.getElementById('msgBox').innerHTML = "Congratulations, you win! Refresh page to play again";
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
         makeBet(1);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
+        
 
     }
 
     if(tempDealerScore === 21) {
-        document.getElementById('msgBox').innerHTML = "Uh oh, looks like the dealer wins :(";
+        document.getElementById('msgBox').innerHTML = "Uh oh, looks like the dealer wins :( Refresh page to play again";
         makeBet(0);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
         
 
     }
 
     if(tempPlayerScore > 21) {
-        document.getElementById('msgBox').innerHTML = "Sorry, your total card value is over 21. Dealer wins :(";
+        document.getElementById('msgBox').innerHTML = "Sorry, your total card value is over 21. Dealer wins :( Refresh page to play again";
         makeBet(0);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
         
     }
 
     if(tempDealerScore > 21) {
-        document.getElementById('msgBox').innerHTML = "Congratulations, dealer score is greater than 21. You win!";
+        document.getElementById('msgBox').innerHTML = "Congratulations, dealer score is greater than 21. You win! Refresh page to play again";
         makeBet(1);
         document.getElementById("btnHit").disabled = true;
         document.getElementById("btnStay").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
 
     }
     if (tempPlayerMoney === 0) {
-        document.getElementById('msgBox').innerHTML = "Sorry, you ran out of money! :((";
+        document.getElementById('msgBox').innerHTML = "Sorry, you ran out of money! :(( Refresh page to play again";
         //disable the buttons to play
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
     }
     
     //here we have to find a way to not have the player not manually keep pressing stay... possible check scores above 17 for dealer?
     //In BlackJack, if dealer has 17 then they are going to stand... keep that in mind. 
     if (tempDealerScore >= 17 && (tempPlayerScore < tempDealerScore) && tempPlayerScore < 21) {
-        document.getElementById('msgBox').innerHTML = "You lost. Dealer score is higher :(";
+        document.getElementById('msgBox').innerHTML = "You lost. Dealer score is higher :( Refresh page to play again";
         makeBet(0);
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
 
     }
 
     if (tempDealerScore >= 17 && (tempPlayerScore > tempDealerScore) && tempPlayerScore < 21) {
-        document.getElementById('msgBox').innerHTML = "You win! You beat Dealer!";
+        document.getElementById('msgBox').innerHTML = "You win! You beat Dealer! Refresh page to play again";
         makeBet(1);
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
         
     }
 
     if (tempDealerScore >= 17 && (tempPlayerScore === tempDealerScore) && tempDealerScore < 21) {
-        document.getElementById('msgBox').innerHTML = "You tied with the dealer! ";
+        document.getElementById('msgBox').innerHTML = "You tied with the dealer! Refresh page to play again";
         document.getElementById("btnStay").disabled = true;
         document.getElementById("btnHit").disabled = true;
         document.getElementById('Money').innerHTML = "Total Money: " + tempPlayerMoney;
-        document.getElementById("btnStart").disabled = false;
+        document.getElementById("btnStart").disabled = true;
         
     }
-
+    
 }
 
 function resetCardString() {
@@ -571,7 +572,6 @@ function displayMoney() {
                 i++;
 
             }
-        
             
     }
    }     
