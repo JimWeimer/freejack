@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="play.css">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body id="playBody">
+
+  <header>
+    <div class="container">
+      <h1 id= "playHeader">FreeJack</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Credits</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class = "flex-container">
+  </div>
+    <!-- This is where I imagine most of our game is going to take place -->
+      <div id = "Player Cards"></div>
+      <canvas id="playerCanvas" width="1200" height="120"></canvas>
+      <div id = "Dealer Cards"></div>
+
+      <!--Here is the canvas. In here, we will want to display cards-->
+      <canvas id="dealerCanvas" width="1200" height="120"></canvas>
+
+  <br>
+  <br>
+  <div class="flex-container">
+  <input type="button" id="btnStart" class="button" value="New Game" onclick='newGame();'/>
+  <input type="button" id="btnHit" class="button" value="Hit" onclick='hit();'/>
+  <input type="button" id="btnStay" class="button" value="Stay" onclick='stand();'/>
+  </div>
+
+    <br>
+    <h2 id = "MoneyHeader">Money</h2>
+    <div id = "Money"></div>
+    <input type = 'number' id = 'playerBet' value = '5' min = '1' />
+    <canvas id = "moneyCanvas" width = "800" height = "120"></canvas>
+    <br>
+
+
+      <div id = "Score: Dealer"></div>
+      <div id = "Score: Player"></div>
+
+    <h3 id="msgBox"></h3>
+
+    <script src="deckOfCards.js"></script>
+</body>
+
+</html>

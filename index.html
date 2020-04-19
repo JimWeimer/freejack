@@ -39,7 +39,7 @@
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
           
-        <button type="submit">Login</button>
+        <button type="submit"><a href="play.html">Login</a></button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
@@ -93,6 +93,7 @@
       </div>
     </form>
   </div>
+
   
   <script>
   // Get the modal
@@ -104,6 +105,19 @@
       modal.style.display = "none";
     }
   }
+
+  if (typeof(Storage) !== "undefined") {
+          // Store
+          localStorage.setItem("email", email);
+          localStorage.setItem("psw", psw);
+          localStorage.setItem("Bank", "500");
+          // Retrieve
+          document.getElementById("resultU").innerHTML = localStorage.getItem("email");
+          document.getElementById("resultP").innerHTML = localStorage.getItem("psw");
+          document.getElementById("resultB").innerHTML = localStorage.getItem("Bank");
+        } else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
   </script>
 
 </body>
