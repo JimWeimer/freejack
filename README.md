@@ -1,8 +1,9 @@
 
 A free blackjack game by Aleks, Jim, Jakob, AJ, and Yilin
 
+Master branch. Due to some issues with merging, much of the progress that was made can be seen on the branch "Aleks' Branch". 
 
-This is the branch we used to do most of the development. There is a file in here named "social media project personal". Just ignore this one, I was having issues with changing the name in Git and I finally created another folder to work in. It still has my first set of commits from the first few weeks, but I then started working in the different folder after that. 
+As a group, we strived to create an ultra-simple and easy to use BlackJack game. This required all of us to learn languages and features we didn't know prior to enrolling in COMP 324. 
 
 TODO:
 
